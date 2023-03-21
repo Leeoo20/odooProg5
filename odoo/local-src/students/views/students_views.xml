@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <record model="ir.ui.view" id="students_student_view_form">
+         <field name="name">students.form</field>
+         <field name="model">students.student</field>
+         <field name="type">form</field>
+         <field name="arch" type="xml">
+             <form string="Student">
+             <sheet>
+                 <group>
+                     <group>
+                          <field name="number"/>
+                          <field name="training_id" />
+                          <field name="user_id" />
+                     </group>
+                     <group>
+                         <field name="firstname"/>
+                         <field name="lastname"/>
+                         <field name="nationalite_id"/>
+                     </group>
+                     <group>
+                     <field name="weighted_average"/>
+                     </group>
+                         <field name="mark_ids">
+                             <tree>
+                                <field name="subject"/>
+                                 <field name="mark"/>
+                                 <field name="coefficient"/>
+                                 <field name="weightedMark"/>
+                             </tree>
+                         </field>
+                 </group>
+
+
+                    <button name="action_prueba" string="Prueba" class="btn btn-link o_call_button_prueba"/>
+
+
+             </sheet>
+
+             </form>
+
+
+         </field>
+     </record>
+
+     <record model="ir.ui.view" id="students_student_view_tree">
+         <field name="name">students.tree</field>
+         <field name="model">students.student</field>
+         <field name="type">tree</field>
+         <field name="arch" type="xml">
+             <tree string="Students">
+                 <field name="firstname"/>
+                 <field name="lastname"/>
+                 <field name="weighted_average"/>
+                 <field name="training_id" />
+                 <field name="mark_ids"/>
+             </tree>
+         </field>
+
+
+     </record>
+
+     <record model="ir.actions.act_window" id="action_students_student_view">
+         <field name="name">Students</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">students.student</field>
+         <field name="view_mode">tree,form</field>
+     </record>
+
+
+    <record id="students_student_view_search" model="ir.ui.view">
+    <field name="name">students.search</field>
+    <field name="model">students.student</field>
+    <field name="arch" type="xml">
+        <search string="Search Students">
+            <filter name="filter_see_french" string="French students" domain="[('nationalite_id.code','=','FR')]"/>
+            <filter name="filter_see_notfrench" string="Other nationality" domain="[('nationalite_id.code','!=','FR')]"/>
+            <separator />
+            <filter name="filter_see_notmark" string="Student Without Mark " domain="[('mark_ids','=',False)]"/>
+            <filter name="filter_see_markmorethan10" string="Graduating Students " domain="[('weighted_average','&gt;=',10)]"/>
+            <filter name="filter_see_marklessthan10" string="Non-Graduating Students " domain="[('weighted_average','&lt;=',10),
+                                                                                                  ('mark_ids','!=',False)
+                                                                                                    ]"/>
+
+
+        </search>
+    </field>
+</record>
+
+
+
+
+
+
+
+
+     <menuitem id="students_menu" name="Students"/>
+     <menuitem id="students_student_menu" name="Students" parent="students_menu" />
+    <menuitem id="students_student_menustudent" name="Students" parent="students_student_menu" action="action_students_student_view"/>
+
+
+
+</odoo>
+
+

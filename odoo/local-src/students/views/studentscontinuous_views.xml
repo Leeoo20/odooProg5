@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<record model="ir.ui.view" id="students_studentcontinuous_view_form">
+         <field name="name">studentscontinuous.form</field>
+         <field name="model">students.studentcontinuous</field>
+         <field name="type">form</field>
+         <field name="arch" type="xml">
+             <form string="Student">
+             <sheet>
+                 <group>
+                     <group>
+                          <field name="number"/>
+                          <field name="training_id" />
+                           <field name="user_id" />
+                     </group>
+                     <group>
+                         <field name="firstname"/>
+                         <field name="lastname"/>
+                         <field name="nationalite_id"/>
+                         <field name="partner_id"/>
+
+                     </group>
+                     <group>
+                     <field name="weighted_average"/>
+                     </group>
+                         <field name="mark_ids">
+                             <tree>
+                                <field name="subject"/>
+                                 <field name="mark"/>
+                                 <field name="coefficient"/>
+                                 <field name="weightedMark"/>
+                             </tree>
+                         </field>
+                 </group>
+             </sheet>
+             </form>
+         </field>
+     </record>
+
+     <record model="ir.ui.view" id="students_studentcontinuous_view_tree">
+         <field name="name">students.tree</field>
+         <field name="model">students.studentcontinuous</field>
+         <field name="type">tree</field>
+         <field name="arch" type="xml">
+             <tree string="Students">
+                 <field name="firstname"/>
+                 <field name="lastname"/>
+                 <field name="weighted_average"/>
+                 <field name="training_id" />
+                 <field name="mark_ids"/>
+             </tree>
+         </field>
+     </record>
+
+     <record model="ir.actions.act_window" id="action_studentscontinuous_student_view">
+         <field name="name">StudentsContinuous</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">students.studentcontinuous</field>
+         <field name="view_mode">tree,form</field>
+     </record>
+    <menuitem id="students_student_menustudentcontinuous" name="Students_continuous" parent="students_student_menu" action="action_studentscontinuous_student_view"/>
+
+</odoo>
